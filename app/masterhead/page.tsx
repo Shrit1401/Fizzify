@@ -44,9 +44,7 @@ const MasterHeadPage = () => {
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 Akshit
               </h3>
-              <p className="text-blue-600 font-medium mb-2">
-                Chief Traveling Officer (CTO)
-              </p>
+              <p className="text-blue-600 font-medium mb-2">CTO</p>
               <span className="inline-block bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
                 Active
               </span>
