@@ -176,6 +176,16 @@ const MasterHeadPage = () => {
             </div>
           </div>
         </div>
+
+        <div className="text-center mt-16 pt-8 border-t border-gray-200">
+          <h3 className="text-2xl font-semibold text-gray-900 mb-4">
+            Contact Us
+          </h3>
+          <p className="text-lg text-gray-600 mb-2">
+            Get in touch with our team
+          </p>
+          <p className="text-xl font-medium text-blue-600">+91 9667271155</p>
+        </div>
       </main>
     </div>
   );
