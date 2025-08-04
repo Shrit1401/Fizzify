@@ -54,7 +54,21 @@ export default function Home() {
         id: doc.id,
         ...doc.data(),
       })) as Product[];
-      setProducts(productsData);
+
+      const sortedProducts = productsData.sort((a, b) => {
+        const aName = a.name.toLowerCase();
+        const bName = b.name.toLowerCase();
+
+        if (aName.includes("ocean")) return 1;
+        if (bName.includes("ocean")) return -1;
+
+        if (aName.includes("coca") || aName.includes("thums")) return -1;
+        if (bName.includes("coca") || bName.includes("thums")) return 1;
+
+        return 0;
+      });
+
+      setProducts(sortedProducts);
     } catch (error) {
       console.error("Error fetching products:", error);
     } finally {
@@ -178,7 +192,7 @@ export default function Home() {
             Sealed Drinks are allowed. We Bring Sealed Drinks.
           </p>
           <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            For Now Boys Hostel only.
+            We are delivering to all the hostels in Manipal.
           </p>
         </div>
 
