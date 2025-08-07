@@ -168,15 +168,23 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       <Navbar />
 
+      <div className="bg-red-600 text-white py-3 px-4 text-center">
+        <p className="font-medium">
+          🚫 Fizzify is closed until Monday. All existing orders will be
+          fulfilled.
+        </p>
+      </div>
+
       <main className="max-w-6xl mx-auto px-6 py-16">
         {state.items.length > 0 && (
           <div className="mb-6 flex justify-center">
-            <Link href="/checkout">
-              <Button className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 text-lg">
-                Go to Checkout ({state.totalItems} items - ₹
-                {state.totalPrice.toFixed(2)})
-              </Button>
-            </Link>
+            <Button
+              className="bg-gray-400 text-white px-8 py-3 text-lg cursor-not-allowed"
+              disabled
+            >
+              Go to Checkout ({state.totalItems} items - ₹
+              {state.totalPrice.toFixed(2)}) - Closed until Monday
+            </Button>
           </div>
         )}
 
@@ -357,11 +365,12 @@ export default function Home() {
 
       {state.items.length > 0 && (
         <div className="fixed bottom-6 right-6 z-50">
-          <Link href="/checkout">
-            <Button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 shadow-lg rounded-full">
-              Checkout ({state.totalItems})
-            </Button>
-          </Link>
+          <Button
+            className="bg-gray-400 text-white px-6 py-3 shadow-lg rounded-full cursor-not-allowed"
+            disabled
+          >
+            Checkout ({state.totalItems}) - Closed
+          </Button>
         </div>
       )}
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { CartProvider } from "@/lib/cart-context";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Fizzify - Cold Drinks Delivery",
@@ -15,11 +16,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script
-          async
+        <Script
           src="https://cdn.seline.com/seline.js"
           data-token="9f3621d9bafc5a2"
-        ></script>
+          strategy="afterInteractive"
+        />
       </head>
       <body>
         <CartProvider>{children}</CartProvider>
