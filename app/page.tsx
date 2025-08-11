@@ -168,23 +168,15 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       <Navbar />
 
-      <div className="bg-red-600 text-white py-3 px-4 text-center">
-        <p className="font-medium">
-          🚫 Fizzify is closed until Monday. All existing orders will be
-          fulfilled.
-        </p>
-      </div>
-
       <main className="max-w-6xl mx-auto px-6 py-16">
         {state.items.length > 0 && (
           <div className="mb-6 flex justify-center">
-            <Button
-              className="bg-gray-400 text-white px-8 py-3 text-lg cursor-not-allowed"
-              disabled
-            >
-              Go to Checkout ({state.totalItems} items - ₹
-              {state.totalPrice.toFixed(2)}) - Closed until Monday
-            </Button>
+            <Link href="/checkout">
+              <Button className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 text-lg">
+                Go to Checkout ({state.totalItems} items - ₹
+                {state.totalPrice.toFixed(2)})
+              </Button>
+            </Link>
           </div>
         )}
 
@@ -202,6 +194,11 @@ export default function Home() {
           <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
             We are delivering to all the hostels in Manipal.
           </p>
+          <div className="mt-4 inline-flex items-center justify-center">
+            <span className="rounded-full bg-green-100 text-green-800 px-3 py-1 text-sm font-medium">
+              50+ bottles sold
+            </span>
+          </div>
         </div>
 
         <div className="mb-12">
@@ -365,12 +362,11 @@ export default function Home() {
 
       {state.items.length > 0 && (
         <div className="fixed bottom-6 right-6 z-50">
-          <Button
-            className="bg-gray-400 text-white px-6 py-3 shadow-lg rounded-full cursor-not-allowed"
-            disabled
-          >
-            Checkout ({state.totalItems}) - Closed
-          </Button>
+          <Link href="/checkout">
+            <Button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 shadow-lg rounded-full">
+              Checkout ({state.totalItems})
+            </Button>
+          </Link>
         </div>
       )}
 

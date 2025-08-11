@@ -110,11 +110,8 @@ const CartComponent = () => {
                   ₹{state.totalPrice.toFixed(2)}
                 </span>
               </div>
-              <Link href="">
-                <Button
-                  className="w-full bg-black/50 cursor-not-allowed"
-                  size="lg"
-                >
+              <Link href="/checkout">
+                <Button className="w-full" size="lg">
                   Checkout
                 </Button>
               </Link>

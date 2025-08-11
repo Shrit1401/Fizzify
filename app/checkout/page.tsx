@@ -19,6 +19,8 @@ export default function CheckoutPage() {
   const [block, setBlock] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [hostelType, setHostelType] = useState("Boys Hostel");
+  const [deliverySlot, setDeliverySlot] = useState("4-6 PM");
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -28,27 +30,10 @@ export default function CheckoutPage() {
     return () => clearInterval(timer);
   }, []);
 
-  const isBefore8PM = currentTime.getHours() < 20;
-  const currentHour = currentTime.getHours();
-  const currentMinute = currentTime.getMinutes();
-
-  const getDeliveryOptions = () => {
-    if (isBefore8PM) {
-      return {
-        immediate: "Available until 9:00 PM",
-        nextDay: "Next day delivery available",
-        nextWeek: "Next week delivery available",
-      };
-    } else {
-      return {
-        nextDay: "Next day delivery available",
-        nextWeek: "Next week delivery available",
-        nextMonth: "Next month delivery available",
-      };
-    }
-  };
-
-  const deliveryOptions = getDeliveryOptions();
+  const deliveryOptions = {
+    slotOne: "4:00 PM - 6:00 PM",
+    slotTwo: "7:00 PM - 8:00 PM",
+  } as const;
 
   const handlePlaceOrder = async () => {
     if (!transactionId.trim()) {
@@ -97,7 +82,9 @@ export default function CheckoutPage() {
         roomNumber: roomNumber.trim(),
         block: block.trim(),
         contactNumber: contactNumber.trim(),
-        deliveryAddress: `Boys Hostel, Manipal Bangalore - Block ${block.trim()}, Room ${roomNumber.trim()}`,
+        hostelType,
+        deliverySlot,
+        deliveryAddress: `${hostelType}, Manipal Bangalore - Block ${block.trim()}, Room ${roomNumber.trim()}`,
         orderTime: serverTimestamp(),
         status: "pending",
       };
@@ -240,13 +227,67 @@ export default function CheckoutPage() {
                     {Object.entries(deliveryOptions).map(([key, value]) => (
                       <div key={key} className="flex items-center space-x-2">
                         <div
-                          className={`w-2 h-2 rounded-full ${
-                            key === "immediate" ? "bg-green-500" : "bg-blue-500"
-                          }`}
+                          className={`w-2 h-2 rounded-full bg-blue-500`}
                         ></div>
                         <span className="text-sm text-blue-800">{value}</span>
                       </div>
                     ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Hostel
+                  </label>
+                  <div className="flex items-center gap-4">
+                    <label className="flex items-center gap-2 text-sm text-gray-700">
+                      <input
+                        type="radio"
+                        name="hostel"
+                        value="Boys Hostel"
+                        checked={hostelType === "Boys Hostel"}
+                        onChange={(e) => setHostelType(e.target.value)}
+                      />
+                      Boys Hostel
+                    </label>
+                    <label className="flex items-center gap-2 text-sm text-gray-700">
+                      <input
+                        type="radio"
+                        name="hostel"
+                        value="Girls Hostel"
+                        checked={hostelType === "Girls Hostel"}
+                        onChange={(e) => setHostelType(e.target.value)}
+                      />
+                      Girls Hostel
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Delivery Slot
+                  </label>
+                  <div className="flex items-center gap-4">
+                    <label className="flex items-center gap-2 text-sm text-gray-700">
+                      <input
+                        type="radio"
+                        name="slot"
+                        value="4-6 PM"
+                        checked={deliverySlot === "4-6 PM"}
+                        onChange={(e) => setDeliverySlot(e.target.value)}
+                      />
+                      4-6 PM
+                    </label>
+                    <label className="flex items-center gap-2 text-sm text-gray-700">
+                      <input
+                        type="radio"
+                        name="slot"
+                        value="7-8 PM"
+                        checked={deliverySlot === "7-8 PM"}
+                        onChange={(e) => setDeliverySlot(e.target.value)}
+                      />
+                      7-8 PM
+                    </label>
                   </div>
                 </div>
 
@@ -311,7 +352,7 @@ export default function CheckoutPage() {
                       <strong>Name:</strong> {name || "Not specified"}
                     </p>
                     <p>
-                      <strong>Area:</strong> Boys Hostel, Manipal Bangalore
+                      <strong>Area:</strong> {hostelType}, Manipal Bangalore
                     </p>
                     <p>
                       <strong>Room:</strong> {roomNumber || "Not specified"}
@@ -322,6 +363,9 @@ export default function CheckoutPage() {
                     <p>
                       <strong>Contact:</strong>{" "}
                       {contactNumber || "Not specified"}
+                    </p>
+                    <p>
+                      <strong>Delivery Slot:</strong> {deliverySlot}
                     </p>
                   </div>
                 </div>
