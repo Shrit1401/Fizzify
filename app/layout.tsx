@@ -16,11 +16,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <Script
+        {/* <Script
           src="https://cdn.seline.com/seline.js"
           data-token="9f3621d9bafc5a2"
           strategy="afterInteractive"
-        />
+        /> */}
       </head>
       <body>
         <CartProvider>{children}</CartProvider>
